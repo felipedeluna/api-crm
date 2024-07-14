@@ -1,14 +1,14 @@
 const express = require('express');
 const soap = require('soap');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const urlProducao = 'https://ws.cfm.org.br:8080/WebServiceConsultaMedicos/ServicoConsultaMedicos?wsdl';
 
 app.get('/api/consultar-medico', (req, res) => {
   const crm = req.query.crm;
   const uf = req.query.uf;
-  const chaveIdentificacao = 'KM0ZCHAW';
+  const chaveIdentificacao = process.env.CHAVE_IDENTIFICACAO;;
 
   soap.createClient(urlProducao, (err, medico) => {
     if (err) {
